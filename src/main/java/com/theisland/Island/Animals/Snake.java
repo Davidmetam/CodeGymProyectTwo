@@ -2,19 +2,15 @@ package com.theisland.Island.Animals;
 
 import com.theisland.Island.FactoryAnimalType.Animal;
 
-@ProbabilityOfEat(fox = 15, rabbit = 20, mouse = 40, duck = 10)
+import java.util.List;
+
+@ProbabilityOfEat(Fox = 15, Rabbit = 20, Mouse = 40, Duck = 10)
 public class Snake extends Animal {
     public Snake() {
         super(15, 3);
     }
 
-    @Override
-    public void eat(Animal animal) {
-
-    }
-
-    @Override
-    public Animal reproduce() {
-        return null;
+    public String toString() {
+        return "Snake";
     }
 }

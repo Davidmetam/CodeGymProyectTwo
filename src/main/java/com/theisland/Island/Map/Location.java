@@ -1,20 +1,27 @@
 package com.theisland.Island.Map;
 
 import com.theisland.Island.FactoryAnimalType.Animal;
-import com.theisland.Island.FactoryAnimalType.HerbivorousCreator;
-import com.theisland.Island.FactoryAnimalType.PredatorsCreator;
+import com.theisland.Island.FactoryAnimalType.AnimalsCreator;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 
 public class Location {
-    HashMap<Animal, List<Animal>> herbivorous;
-    HashMap<Animal, List<Animal>> predators;
+    private HashMap<Animal, List<Animal>> animals;
 
     public Location() throws InvocationTargetException, InstantiationException, IllegalAccessException {
-       HashMap<Animal, List<Animal>> predators = PredatorsCreator.spawn();
-       HashMap<Animal, List<Animal>> herbivorous = PredatorsCreator.spawn();
+       animals = AnimalsCreator.spawn();
     }
+
+    public HashMap<Animal, List<Animal>> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(HashMap<Animal, List<Animal>> animals) {
+        this.animals = animals;
+    }
+
+
 
 }

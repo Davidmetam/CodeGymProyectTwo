@@ -8,20 +8,20 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ProbabilityOfEat {
-    int wolf() default 0;
-    int snake() default 0;
-    int fox() default 0;
-    int bear() default 0;
-    int eagle() default 0;
-    int horse() default 0;
-    int deer() default 0;
-    int rabbit() default 0;
-    int mouse() default 0;
-    int goat() default 0;
-    int sheep() default 0;
-    int wildPig() default 0;
-    int buffalo() default 0;
-    int duck() default 0;
-    int caterpillar() default 0;
-    int grass() default 0;
+    int Wolf() default 0;
+    int Snake() default 0;
+    int Fox() default 0;
+    int Bear() default 0;
+    int Eagle() default 0;
+    int Horse() default 0;
+    int Deer() default 0;
+    int Rabbit() default 0;
+    int Mouse() default 0;
+    int Goat() default 0;
+    int Sheep() default 0;
+    int WildPig() default 0;
+    int Buffalo() default 0;
+    int Duck() default 0;
+    int Caterpillar() default 0;
+    int Grass() default 0;
 }
