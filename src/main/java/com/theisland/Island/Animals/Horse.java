@@ -7,4 +7,14 @@ public class Horse extends Animal {
     public Horse() {
         super(400, 60);
     }
+
+    @Override
+    public void eat(Animal animal) {
+
+    }
+
+    @Override
+    public Animal reproduce() {
+        return null;
+    }
 }

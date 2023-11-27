@@ -1,5 +1,10 @@
 package com.theisland.Island.Map;
 
 public class TheIsland {
-    Location[][] locations = new Location[100][20];
+    Location[][] map;
+
+    public TheIsland(int x, int y){
+
+        map = new Location[x][y];
+    }
 }

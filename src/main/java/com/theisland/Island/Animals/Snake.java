@@ -7,4 +7,14 @@ public class Snake extends Animal {
     public Snake() {
         super(15, 3);
     }
+
+    @Override
+    public void eat(Animal animal) {
+
+    }
+
+    @Override
+    public Animal reproduce() {
+        return null;
+    }
 }

@@ -7,4 +7,14 @@ public class WildPig extends Animal {
     public WildPig() {
         super(400, 50);
     }
+
+    @Override
+    public void eat(Animal animal) {
+
+    }
+
+    @Override
+    public Animal reproduce() {
+        return null;
+    }
 }

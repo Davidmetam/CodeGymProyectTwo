@@ -8,4 +8,14 @@ public class Wolf extends Animal {
     public Wolf() {
         super(50, 8);
     }
+
+    @Override
+    public void eat(Animal animal) {
+
+    }
+
+    @Override
+    public Animal reproduce() {
+        return null;
+    }
 }
