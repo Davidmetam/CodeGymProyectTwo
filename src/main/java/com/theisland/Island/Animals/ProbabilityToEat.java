@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ProbabilityOfEat {
+public @interface ProbabilityToEat {
     int Wolf() default 0;
     int Snake() default 0;
     int Fox() default 0;

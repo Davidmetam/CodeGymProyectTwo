@@ -1,11 +1,14 @@
 package com.theisland.Island.FactoryAnimalType;
 
-import com.theisland.Island.Animals.ProbabilityOfEat;
+import com.theisland.Island.Animals.ProbabilityToEat;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import com.theisland.Island.Animals.*;
 
 public abstract class Animal {
     private final double weight;
@@ -34,23 +37,36 @@ public abstract class Animal {
         this.starving = starving;
     }
 
-    public boolean eat(List<Animal> eatable) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException{
-        HashMap<Class<?>, Integer> eatableAnimals = getEatableAnimals();
-        if (getStarving() != getNecesaryFood()) {
-
+    public Class<? extends Animal> eat(HashMap<Class<? extends Animal>, List<Animal>> animals) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException{
+        List<String> eatableAnimals = getEatableAnimals();
+        if (getStarving() < getNecesaryFood()) {
+            ThreadLocalRandom pickRandomAnimal = ThreadLocalRandom.current();
+            int randomAnimal = pickRandomAnimal.nextInt(eatableAnimals.size());
+            String animalToBeEaten = "com.theisland.Island.Animals."+eatableAnimals.get(randomAnimal);
+            if();
         }
 
-        return true;
-    }
-    public Animal reproduce(){
         return null;
     }
+    public Animal reproduce(){
+        try {
+            return this.getClass().getConstructor().newInstance();
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void move(){}
-    public HashMap<Class<?>, Integer> getEatableAnimals() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        ProbabilityOfEat annotation = this.getClass().getAnnotation(ProbabilityOfEat.class);
+    public List<String> getEatableAnimals() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+        ProbabilityToEat annotation = this.getClass().getAnnotation(ProbabilityToEat.class);
 
-        HashMap<Class<?>, Integer> eatableAnimals = new HashMap<>();
-        Method[] animalsAnnotated = ProbabilityOfEat.class.getDeclaredMethods();
+        List<String> eatableAnimals = new ArrayList<>();
+        Method[] animalsAnnotated = ProbabilityToEat.class.getDeclaredMethods();
 
         for (Method method : animalsAnnotated) {
             String animalName = method.getName();
@@ -59,7 +75,7 @@ public abstract class Animal {
                 continue;
             }
 
-            eatableAnimals.put(Class.forName("com.theisland.Island.Animals"+animalName), probability);
+            eatableAnimals.add(animalName);
         }
         return eatableAnimals;
     }
