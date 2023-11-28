@@ -31,7 +31,7 @@ public class Location {
         this.animals = animals;
     }
 
-    //para comer primero se obtendra la lista de animales que se puede comer el animal hambriento (proceso de observacion del animal)
+
     public void eatRandomExistentAnimal(Animal hungryAnimal) {
         if (!hungryAnimal.isHungry()) {
             return;
