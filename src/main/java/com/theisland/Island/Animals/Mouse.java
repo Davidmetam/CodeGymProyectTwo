@@ -2,10 +2,14 @@ package com.theisland.Island.Animals;
 
 import com.theisland.Island.FactoryAnimalType.Animal;
 
-@ProbabilityToEat(Caterpillar = 90, Grass = 100)
+import java.util.HashMap;
+
 public class Mouse extends Animal {
     public Mouse() {
-        super(0.05, 0.01);
+        super(0.05, 0.01, new HashMap<>(){{
+            put(Caterpillar.class, 90);
+            put(Grass.class, 100);
+        }});
     }
 
     public String toString() {

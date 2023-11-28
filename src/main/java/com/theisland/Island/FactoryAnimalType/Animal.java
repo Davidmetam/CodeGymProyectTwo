@@ -1,24 +1,32 @@
 package com.theisland.Island.FactoryAnimalType;
 
-import com.theisland.Island.Animals.ProbabilityToEat;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import com.theisland.Island.Animals.*;
 
 public abstract class Animal {
     private final double weight;
     private final double necesaryFood;
     private double starving;
+    private final HashMap<Class<?>, Integer> probabilityOfEat;
+    private final boolean isHungry;
 
-    public Animal(double weight, double necesaryFood) {
+    public Animal(double weight, double necesaryFood, HashMap<Class<?>, Integer> probabilityOfEat) {
         this.weight = weight;
         this.necesaryFood = necesaryFood;
         starving = necesaryFood;
+        this.probabilityOfEat = probabilityOfEat;
+        isHungry = true;
+    }
+
+    public boolean isHungry() {
+        if (starving == necesaryFood){
+            return false;
+        }
+        return isHungry;
+    }
+
+
+    public HashMap<Class<?>, Integer> getProbabilityOfEat() {
+        return probabilityOfEat;
     }
 
     public double getWeight() {
@@ -37,48 +45,17 @@ public abstract class Animal {
         this.starving = starving;
     }
 
-    public Class<? extends Animal> eat(HashMap<Class<? extends Animal>, List<Animal>> animals) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException{
-        List<String> eatableAnimals = getEatableAnimals();
-        if (getStarving() < getNecesaryFood()) {
-            ThreadLocalRandom pickRandomAnimal = ThreadLocalRandom.current();
-            int randomAnimal = pickRandomAnimal.nextInt(eatableAnimals.size());
-            String animalToBeEaten = "com.theisland.Island.Animals."+eatableAnimals.get(randomAnimal);
-            if();
+    public void eat(Animal eatenAnimal){
+        starving += eatenAnimal.weight;
+        if (starving > weight){
+            starving = weight;
         }
-
-        return null;
     }
     public Animal reproduce(){
         try {
             return this.getClass().getConstructor().newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
+        } catch (ReflectiveOperationException e) {
             throw new RuntimeException(e);
         }
     }
-    public void move(){}
-    public List<String> getEatableAnimals() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        ProbabilityToEat annotation = this.getClass().getAnnotation(ProbabilityToEat.class);
-
-        List<String> eatableAnimals = new ArrayList<>();
-        Method[] animalsAnnotated = ProbabilityToEat.class.getDeclaredMethods();
-
-        for (Method method : animalsAnnotated) {
-            String animalName = method.getName();
-            int probability = (int) method.invoke(annotation);
-            if(probability == 0){
-                continue;
-            }
-
-            eatableAnimals.add(animalName);
-        }
-        return eatableAnimals;
-    }
-
-
 }

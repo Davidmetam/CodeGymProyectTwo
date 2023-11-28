@@ -2,10 +2,13 @@ package com.theisland.Island.Animals;
 
 import com.theisland.Island.FactoryAnimalType.Animal;
 
-@ProbabilityToEat(Grass = 100)
+import java.util.HashMap;
+
 public class Buffalo extends Animal {
     public Buffalo() {
-        super(700, 100);
+        super(700, 100, new HashMap<>(){{
+            put(Grass.class, 100);
+        }});
     }
 
 

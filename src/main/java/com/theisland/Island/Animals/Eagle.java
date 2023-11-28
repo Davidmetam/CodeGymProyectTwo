@@ -2,10 +2,17 @@ package com.theisland.Island.Animals;
 
 import com.theisland.Island.FactoryAnimalType.Animal;
 
-@ProbabilityToEat(Fox = 10, Rabbit = 90, Mouse = 90, Duck = 80)
+import java.util.HashMap;
+
 public class Eagle extends Animal {
+
     public Eagle() {
-        super(6, 1);
+        super(6, 1, new HashMap<>(){{
+            put(Fox.class, 10);
+            put(Rabbit.class, 90);
+            put(Mouse.class, 90);
+            put(Duck.class, 80);
+        }});
     }
 
     public String toString() {

@@ -2,11 +2,23 @@ package com.theisland.Island.Animals;
 
 import com.theisland.Island.FactoryAnimalType.Animal;
 
-@ProbabilityToEat(Snake = 80, Horse = 40, Deer = 80, Rabbit = 80, Mouse = 90, Goat = 70, Sheep = 70, WildPig = 50, Buffalo = 20, Duck = 10)
+import java.util.HashMap;
+
 public class Bear extends Animal {
 
     public Bear() {
-        super(500, 80);
+        super(500, 80, new HashMap<>(){{
+            put(Snake.class, 80);
+            put(Horse .class,40);
+            put(Deer .class,80);
+            put(Rabbit .class,80);
+            put(Mouse .class,90);
+            put(Goat .class,70);
+            put(Sheep .class,70);
+            put(WildPig .class,50);
+            put(Buffalo .class,20);
+            put(Duck .class,10);
+        }});
     }
 
 
