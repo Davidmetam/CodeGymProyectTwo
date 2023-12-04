@@ -6,10 +6,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LifeCreator {
-    private static final HashMap<Class<?>, Integer> maxQuantity = new HashMap<>();
+    private static final HashMap<Class<? extends Animal>, Integer> maxQuantity = new HashMap<>();
 
     static {
         maxQuantity.put(Wolf.class, 30);
@@ -27,13 +28,13 @@ public class LifeCreator {
         maxQuantity.put(Buffalo.class, 10);
         maxQuantity.put(Duck.class, 200);
         maxQuantity.put(Caterpillar.class, 1000);
-        maxQuantity.put(Grass.class, 200);
+
     }
 
-    public static HashMap<Class<?>, List<Animal>> spawn() throws InvocationTargetException, InstantiationException, IllegalAccessException {
-        HashMap<Class<?>, List<Animal>> animals = new HashMap<>();
+    public static HashMap<Class<? extends Animal>, List<Animal>> spawn() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        HashMap<Class<? extends Animal>, List<Animal>> animals = new HashMap<>();
 
-        for (HashMap.Entry<Class<?>, Integer> animal : maxQuantity.entrySet()) {
+        for (Map.Entry<Class<? extends Animal>, Integer> animal : maxQuantity.entrySet()) {
             int quantityOfAnimal = ThreadLocalRandom.current().nextInt(1, animal.getValue());
             List<Animal> listOfCurrentAnimal = new ArrayList<>();
 

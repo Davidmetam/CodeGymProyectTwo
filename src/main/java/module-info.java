@@ -4,6 +4,6 @@ module com.theisland.theisland {
 
     requires com.dlsc.formsfx;
 
-    opens com.theisland.Island to javafx.fxml;
+    opens com.theisland.Island to javafx.fxml, com.google.gson;
     exports com.theisland.Island;
 }
